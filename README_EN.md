@@ -6,7 +6,7 @@
 
 Rico's Blog:  <a href="https://blog.ricocc.com/" target="_blank">blog.ricocc.com</a>
 
-Repository: <a href="https://github.com/ricocc/public-portfolio-site" target="_blank">github.com/ricocc/public-portfolio-site</a>
+Repository: <a href="https://github.com/Y1L1N10/yilin-blog" target="_blank">github.com/Y1L1N10/yilin-blog</a>
 
 
 <img src="public/preview01.jpg" alt="Blog Preview" width="640" height="auto" style="display:inline-block;margin:12px;">

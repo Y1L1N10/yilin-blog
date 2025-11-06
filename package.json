@@ -1,9 +1,9 @@
 {
-  "name": "rico-blog-template",
-  "author": "Ricoui",
+  "name": "yilin-blog",
+  "author": "yilin",
   "description": "Astro.js Project",
-  "website": "https://ricoui.com/",
-  "repository": "https://github.com/ricocc/public-portfolio-site",
+  "website": "/",
+  "repository": "https://github.com/Y1L1N10/yilin-blog",
   "license": "MIT",
   "type": "module",
   "version": "0.0.1",

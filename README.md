@@ -6,7 +6,7 @@
 ### 网站预览
 Rico's Blog:  <a href="https://ricoui.com/" target="_blank">ricoui.com</a>
 
-仓库地址:   <a href="github.com/ricocc/public-portfolio-site" target="_blank"> https://github.com/ricocc/public-portfolio-site </a>
+仓库地址:   <a href="https://github.com/Y1L1N10/yilin-blog" target="_blank"> https://github.com/Y1L1N10/yilin-blog </a>
 
 <img src="public/preview-01.jpg" alt="Blog Preview" width="640" height="auto" style="display:inline-block;margin:12px;">
 
