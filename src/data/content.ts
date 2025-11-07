@@ -141,7 +141,7 @@ export const pageDescription: PageDescription = {
   index:
     "我是 yilin，欢迎来到我的个人博客。在这里分享技术文章、项目记录和生活感悟。",
   project: "记录我参与的各种项目，包括开发作品和技术实践。",
-  about: "热爱技术，专注于前端开发和用户体验设计。",
+  about: "热爱技术，专注于AI开发和享受生活。",
   blog: "分享技术学习笔记、开发心得和个人思考，希望能对你有所帮助。",
 };
 
