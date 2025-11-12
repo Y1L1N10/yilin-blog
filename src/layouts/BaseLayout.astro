@@ -16,7 +16,7 @@ const { title, description,keywords } = Astro.props;
 	</head>
 	<body class="_body">
 		<div class="">
-			<Nav transition:persist/>
+			<Nav />
 			<slot />
 			<Footer />
 		</div>
@@ -44,6 +44,12 @@ const { title, description,keywords } = Astro.props;
 
 			}
 
+			/* 防止 View Transitions 导致的页面抖动 */
+			::view-transition-old(root),
+			::view-transition-new(root) {
+				animation: none;
+				mix-blend-mode: normal;
+			}
 		</style>
 	</body>
 </html>

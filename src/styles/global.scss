@@ -270,7 +270,12 @@
 }
 
 /* Global variables */
-html,
+html {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll; /* 方案组合：强制显示滚动条 */
+}
+
 body {
     height: 100%;
     overflow-x: hidden;
@@ -282,6 +287,8 @@ body {
     font-size: var(--text-size);
     font-weight: 400;
     letter-spacing: 0.2px;
+    /* 防止页面切换时的布局抖动 */
+    min-height: 100vh;
 }
 
 *,
