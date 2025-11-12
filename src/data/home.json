@@ -110,7 +110,7 @@
   },
   {
     "id": "10",
-    "cover": "/assets/cover/cover_mcp_index.png",
+    "cover": "/assets/projects/cover_mcp_index.png",
     "title": "Xmind_Mcp_tools",
     "desc": "在 AI 终端调用 MCP 生成 xmind 文件",
     "detail": "/blog/make_a_map-tools",
@@ -121,7 +121,7 @@
   },
   {
     "id": "11",
-    "cover": "/src/assets/projects/Homebrew.png",
+    "cover": "/assets/projects/Homebrew.png",
     "title": "How to using Homebrew",
     "desc": "日常如何使用Homebrew",
     "detail": "/blog/brew",
