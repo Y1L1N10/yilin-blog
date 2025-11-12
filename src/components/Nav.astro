@@ -91,14 +91,43 @@ import NavMobile from "../components/NavMobile.astro";
 
 	nav {
 		z-index: 9999;
-		position: relative;
 		font-family: var(--font-brand);
 		font-weight: 500;
 		position: sticky;
-		top: 0;
-		-webkit-backdrop-filter: saturate(300%) blur(5px);
-		backdrop-filter: saturate(300%) blur(5px);
-		background-color: rgba(var(--color-999-rgb), 0.65);
+		top: 12px; /* 与顶部保持距离 */
+		padding: 0 16px; /* 左右留白 */
+		pointer-events: none; /* 让外层透明区域不阻挡点击 */
+	}
+
+	nav .container {
+		pointer-events: auto; /* 恢复导航栏内容的点击 */
+		border-radius: 50px; /* 椭圆形圆角 */
+		padding: 2px 20px; /* 内边距 */
+
+		/* 液态玻璃效果 */
+		-webkit-backdrop-filter: saturate(180%) blur(10px);
+		backdrop-filter: saturate(180%) blur(10px);
+		background: rgba(var(--color-999-rgb), 0.5);
+
+		/* 边框光泽 */
+		border: 1px solid rgba(255, 255, 255, 0.18);
+
+		/* 阴影增强立体感 */
+		box-shadow:
+			0 8px 32px rgba(0, 0, 0, 0.1),
+			0 2px 8px rgba(0, 0, 0, 0.05),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+		/* 平滑过渡 */
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	nav .container:hover {
+		background: rgba(var(--color-999-rgb), 0.8);
+		box-shadow:
+			0 12px 40px rgba(0, 0, 0, 0.15),
+			0 4px 12px rgba(0, 0, 0, 0.08),
+			inset 0 1px 0 rgba(255, 255, 255, 0.15);
 	}
 	.bg-ticker{
 		position: absolute;
@@ -142,17 +171,17 @@ import NavMobile from "../components/NavMobile.astro";
         display: inline-block;
         position: relative;
         line-height: 1;
-        width: 40px;
-        height: 40px;
+        width: 30px;               /* 改为和图片一致 */
+        height: 30px;              /* 改为和图片一致 */
         border-radius: 50%;
 		overflow: hidden;
     }
 	.avatar__img{
 		display: block;
 		border-radius: 50%;
-		width: 40px;               /* 添加这行 */
-		height: 40px;              /* 添加这行 */
-    	object-fit: cover;         /* 添加这行 - 关键 */
+		width: 30px;
+		height: 30px;
+    	object-fit: cover;
     }
 	.avatar__name{
 		line-height: normal;
@@ -161,9 +190,26 @@ import NavMobile from "../components/NavMobile.astro";
     }
 	.nav-wrapper{
 		display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 1rem;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		width: 100%;
+	}
+
+	.menu-header {
+		display: flex;
+		justify-content: space-between;
+		gap: 0.5rem;
+		padding: 0;
+	}
+
+	.menu-footer {
+		--icon-size: var(--text-xl);
+		--icon-padding: 0.5rem;
+		display: flex;
+		justify-content: space-between;
+		gap: 0.75rem;
+		padding: .35rem 0rem;
 	}
 	.nav-items {
 		margin: 0;
