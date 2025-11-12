@@ -1,0 +1,257 @@
+---
+interface Props {
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { headings } = Astro.props;
+
+// 过滤掉 h1，只显示 h2-h4
+const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 4);
+---
+
+{tocHeadings.length > 0 && (
+  <aside class="toc-wrapper">
+    <nav class="toc" aria-label="目录">
+      <div class="toc-header">目录</div>
+      <ul class="toc-list">
+        {tocHeadings.map((heading) => (
+          <li class={`toc-item toc-level-${heading.depth}`} data-heading-id={heading.slug}>
+            <a href={`#${heading.slug}`} class="toc-link">
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </aside>
+)}
+
+<script>
+  // Intersection Observer 实现当前标题高亮
+  function initTOC() {
+    const tocWrapper = document.querySelector('.toc-wrapper');
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.content h2, .content h3, .content h4');
+
+    if (!tocLinks.length || !headings.length || !tocWrapper) return;
+
+    let activeId: string | null = null;
+
+    // 滚动目录项到可见位置
+    function scrollTocItemIntoView(tocItem: Element) {
+      const tocWrapperEl = tocWrapper as HTMLElement;
+      const tocItemEl = tocItem as HTMLElement;
+
+      const wrapperRect = tocWrapperEl.getBoundingClientRect();
+      const itemRect = tocItemEl.getBoundingClientRect();
+
+      // 计算目录项相对于容器的位置
+      const itemTop = itemRect.top - wrapperRect.top + tocWrapperEl.scrollTop;
+      const itemBottom = itemTop + itemRect.height;
+
+      const wrapperScrollTop = tocWrapperEl.scrollTop;
+      const wrapperHeight = tocWrapperEl.clientHeight;
+
+      // 如果目录项在容器视口之外，滚动到合适位置
+      if (itemTop < wrapperScrollTop) {
+        // 在顶部之外，滚动到顶部
+        tocWrapperEl.scrollTo({ top: itemTop - 20, behavior: 'smooth' });
+      } else if (itemBottom > wrapperScrollTop + wrapperHeight) {
+        // 在底部之外，滚动使其居中
+        tocWrapperEl.scrollTo({
+          top: itemTop - wrapperHeight / 2 + itemRect.height / 2,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    // 更新活动标题
+    function updateActiveHeading() {
+      const scrollTop = document.body.scrollTop || document.documentElement.scrollTop || 0;
+      let currentActiveId: string | null = null;
+
+      // 找到最接近顶部的标题（已经超过顶部 120px 的标题中的最后一个）
+      headings.forEach((heading) => {
+        const rect = heading.getBoundingClientRect();
+        const headingTop = rect.top + scrollTop;
+
+        if (scrollTop >= headingTop - 120) {
+          currentActiveId = heading.getAttribute('id');
+        }
+      });
+
+      // 如果活动标题发生变化，更新高亮
+      if (currentActiveId !== activeId) {
+        activeId = currentActiveId;
+
+        // 移除所有高亮
+        document.querySelectorAll('.toc-item').forEach((item) => {
+          item.classList.remove('active');
+        });
+
+        // 添加当前高亮
+        if (activeId) {
+          const tocItem = document.querySelector(`[data-heading-id="${activeId}"]`);
+          if (tocItem) {
+            tocItem.classList.add('active');
+            scrollTocItemIntoView(tocItem);
+          }
+        }
+      }
+    }
+
+    // 使用轮询检测滚动变化
+    let lastScroll = -1;
+    setInterval(function() {
+      const currentScroll = document.body.scrollTop || document.documentElement.scrollTop || 0;
+      if (currentScroll !== lastScroll) {
+        lastScroll = currentScroll;
+        updateActiveHeading();
+      }
+    }, 100);
+
+    // 初始更新
+    updateActiveHeading();
+
+    // 点击目录项平滑滚动
+    tocLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        if (!href) return;
+
+        // 使用 getElementById 而不是 querySelector，避免特殊字符问题
+        const id = href.replace('#', '');
+        const target = document.getElementById(id);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  }
+
+  // 页面加载时初始化
+  document.addEventListener('DOMContentLoaded', initTOC);
+
+  // Astro View Transitions 支持
+  document.addEventListener('astro:page-load', initTOC);
+</script>
+
+<style lang="scss">
+  .toc-wrapper {
+    position: fixed;
+    top: 120px;
+    left: max(2rem, calc((100vw - 1020px) / 2 - 280px));
+    width: 240px;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+    z-index: 10;
+
+    // 隐藏滚动条但保留功能
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-700) transparent;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-700);
+      border-radius: 2px;
+    }
+  }
+
+  .toc {
+    position: sticky;
+    top: 0;
+  }
+
+  .toc-header {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-300);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 2px solid var(--color-800);
+  }
+
+  .toc-item {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+  }
+
+  .toc-link {
+    display: block;
+    padding: 0.4rem 0 0.4rem 1rem;
+    color: var(--color-500);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    border-left: 2px solid transparent;
+    margin-left: -2px;
+
+    &:hover {
+      color: var(--color-200);
+      text-decoration: none;
+    }
+  }
+
+  // 层级缩进
+  .toc-level-2 .toc-link {
+    padding-left: 1rem;
+    font-weight: 500;
+  }
+
+  .toc-level-3 .toc-link {
+    padding-left: 1.5rem;
+    font-size: 0.8125rem;
+  }
+
+  .toc-level-4 .toc-link {
+    padding-left: 2rem;
+    font-size: 0.8125rem;
+    color: var(--color-600);
+  }
+
+  // 激活状态
+  .toc-item.active > .toc-link {
+    color: var(--color-100);
+    font-weight: 600;
+    border-left-color: var(--color-blue);
+  }
+
+  // 响应式：平板和移动端
+  @media (max-width: 1280px) {
+    .toc-wrapper {
+      left: 1rem;
+      width: 200px;
+    }
+  }
+
+  // 响应式：小屏幕隐藏
+  @media (max-width: 1023px) {
+    .toc-wrapper {
+      display: none;
+    }
+  }
+
+  // 响应式：超大屏幕优化间距
+  @media (min-width: 1600px) {
+    .toc-wrapper {
+      left: calc((100vw - 1020px) / 2 - 300px);
+      width: 260px;
+    }
+  }
+</style>

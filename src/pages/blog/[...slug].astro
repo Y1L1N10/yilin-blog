@@ -1,6 +1,9 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import BackToTop from "../../components/BackToTop.astro";
+
 interface Props {
 	entry: CollectionEntry<'blog'>;
 }
@@ -16,10 +19,16 @@ export async function getStaticPaths() {
 	}));
 }
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 ---
 
 <BlogPostLayout title={entry.data.title} description={entry.data.description}>
+	<!-- 目录组件 -->
+	<TableOfContents headings={headings} />
+
+	<!-- 返回顶部按钮 -->
+	<BackToTop />
+
 	<!-- <Back href="/blog/"/> -->
 	<div class="post article">
 		<main class="post-wrapper">
@@ -154,18 +163,22 @@ const { Content } = await entry.render();
 	.content :global(h2){
 		font-size: 1.75rem;
 		color:var(--color-100);
+		scroll-margin-top: 100px; /* 导航栏高度 + 额外间距 */
 	}
 	.content :global(h3){
 		font-size: 1.5rem;
 		color:var(--color-100);
+		scroll-margin-top: 100px;
 	}
 	.content :global(h4){
 		font-size: 1.25rem;
 		color:var(--color-200);
+		scroll-margin-top: 100px;
 	}
 	.content :global(h5){
 		font-size: 1rem;
 		color:var(--color-300);
+		scroll-margin-top: 100px;
 	}
 	.content :global(img) {
 		border-radius: 8px;
