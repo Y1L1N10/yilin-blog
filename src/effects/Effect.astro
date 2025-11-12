@@ -98,7 +98,7 @@
 			}
 
 			const savedState = localStorage.getItem('effectState');
-			return savedState ? parseInt(savedState) : 0;
+			return savedState ? parseInt(savedState) : 1;
 		} catch (e) {
 			console.error('无法从localStorage读取状态:', e);
 			return 0;
