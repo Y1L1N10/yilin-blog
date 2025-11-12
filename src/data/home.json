@@ -1,6 +1,7 @@
 [
   {
     "id": "1",
+    "disabled": true,
     "cover": "/assets/cover/pexels-tink-s-838159870-19489123.jpg",
     "title": "【示例】阿勒泰",
     "desc": "阿勒泰旅行记录",
@@ -10,6 +11,7 @@
   },
   {
     "id": "2",
+    "disabled": true,
     "cover": "/assets/cover/cover-3d-cloud.jpg",
     "title": "【示例】Blender 云服务场景",
     "desc": "Blender, Cloud",
@@ -19,6 +21,7 @@
   },
   {
     "id": "3",
+    "disabled": true,
     "cover": "/assets/cover/cover-travel.jpg",
     "title": "【示例】Tink 旅行生活日记",
     "desc": "Mobile 网站",
@@ -29,6 +32,7 @@
   },
   {
     "id": "4",
+    "disabled": true,
     "cover": "/assets/cover/cover-free-3d-valentines-assets.jpg",
     "title": "【示例】Valentine's Day 3D Icons",
     "desc": "Free 3D Icons Pack",
@@ -40,6 +44,7 @@
   },
   {
     "id": "5",
+    "disabled": true,
     "cover": "/assets/cover/cover-todo.jpg",
     "title": "【示例】TodoList 网页版",
     "desc": "一款优秀的设计简洁的 Todolist 网页版本",
@@ -52,6 +57,7 @@
   },
   {
     "id": "6",
+    "disabled": true,
     "cover": "/assets/cover/cover-gradientshub.jpg",
     "useVideo": false,
     "title": "GradientsHub.com",
@@ -60,11 +66,11 @@
     "detail": "https://gradientshub.com/?ref=portfolio",
     "category": "web,recommend,brand",
     "tag": "Web",
-    "date": "2025-02-28",
-    "mark": true
+    "date": "2025-02-28"
   },
   {
     "id": "7",
+    "disabled": true,
     "cover": "/assets/cover/cover-uiuxdeck.jpg",
     "useVideo": false,
     "title": "UIUX 设计工具&资源库",
@@ -73,34 +79,33 @@
     "detail": "https://uiuxdeck.com/?ref=portfolio",
     "category": "web,recommend,brand",
     "tag": "Web",
-    "date": "2025-03-20",
-    "mark": true
+    "date": "2025-03-20"
   },
   {
     "id": "8",
+    "disabled": true,
     "cover": "/assets/cover/cover-inspoweb.jpg",
     "useVideo": false,
     "title": "Website Inspiration ",
     "desc": "收集网站灵感和模板",
     "url": "https://inspoweb.com/?ref=portfolio",
     "detail": "https://inspoweb.com/?ref=portfolio",
-    "category": "web,brand,recommend",
+    "category": "web,brand",
     "tag": "Web",
-    "date": "2025-02-16",
-    "mark": true
+    "date": "2025-02-16"
   },
   {
     "id": "9",
+    "disabled": true,
     "cover": "/assets/cover/cover-ricoog.jpg",
     "useVideo": false,
     "title": "Rico OG Gallery",
     "desc": "Rico OG Inspiration Library",
     "url": "https://og.ricoui.com/",
     "detail": "https://og.ricoui.com/",
-    "category": "web,recommend",
+    "category": "web",
     "tag": "Web",
     "date": "2025-08-06",
-    "mark": true,
     "opensource": false
   },
   {
@@ -109,8 +114,20 @@
     "title": "Xmind_Mcp_tools",
     "desc": "在 AI 终端调用 MCP 生成 xmind 文件",
     "detail": "/blog/make_a_map-tools",
-    "category": "ai,recommend",
+    "category": "ai",
     "tag": " MCP",
+    "mark": true,
     "date": "2025-11-07"
+  },
+  {
+    "id": "11",
+    "cover": "/src/assets/projects/Homebrew.png",
+    "title": "How to using Homebrew",
+    "desc": "日常如何使用Homebrew",
+    "detail": "/blog/brew",
+    "category": "Brew,recommend",
+    "tag": " Tools",
+    "mark": true,
+    "date": "2025-11-12"
   }
 ]

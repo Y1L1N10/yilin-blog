@@ -8,6 +8,9 @@ import Filter from '../components/Filter.astro';
 import cardData from '../data/home.json';
 const cards = [];
 for (const [index,item] of cardData.entries()) {
+  // 跳过被禁用的项目
+  if (item.disabled) continue;
+
   const card = {
     id: item.id || index,
     title: item.title,
